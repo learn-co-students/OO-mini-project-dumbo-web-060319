@@ -1,5 +1,5 @@
 class Allergy
-    attr_accessor :name, :ingredient, :count
+    attr_accessor :name, :ingredient, :count, :user
     @@all = []
 
     def self.all
@@ -14,5 +14,9 @@ class Allergy
 
     def count 
       @@all.select {|allergy| ingredient == allergy.ingredient}.size
+    end
+
+    def users
+
     end
 end

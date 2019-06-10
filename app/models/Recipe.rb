@@ -33,9 +33,15 @@ class Recipe
     RecipeCard.all.map {|card| card.user}
   end
  
-  # should return all of the Ingredients in this recipe that are allergens for Users in our system.
   def ingredients
-  	
+    rec_ings = RecipeIngredient.all.select {|rec_ing| rec_ing.recipe == self}
+  	ingreds = rec_ings.map {|rec_ing| rec_ing.ingredient}
+  end
+
+  # should return all of the Ingredients in this recipe that are allergens for Users in our system.
+  def allergens
+	allergs = Allergy.all.select {|allergy| self.ingredients.include?(allergy.ingredient)}
+	allergs.map {|allergy| allergy.ingredient}.uniq
   end
 
 end

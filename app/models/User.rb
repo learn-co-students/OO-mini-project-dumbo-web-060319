@@ -1,5 +1,7 @@
 class User 
 
+	attr_reader :allergy
+
     @@all = []
 
     def initialize
@@ -27,20 +29,22 @@ class User
 
     def allergens
         Allergy.all.select do |allergy|
-            #Return all allergens the user has
+          allergy.user == self
         end
     end 
 
     def top_three_recipes
-        RecipeCard.all.select do |recipe_card|
-            #return top 3 highest rated recipes for this user
-        end
+        recipe_cards = RecipeCard.all.sort_by {|recipe_card| recipe_card.rating}.reverse[0...2]
     end 
 
     def most_recent_recipe
-        RecipeCard.all.select do |recipe_card|
-           #look through date to find most recent one for user
-        end
+        RecipeCard.all[-1]
+    end
+
+    def safe_recipes
+      Allergy.all.select do |allergy|
+          allergy.user != self
+      end
     end
 
 end 
