@@ -25,9 +25,12 @@ class Ingredient
         Allergy.all.map { |allergy| 
 
            if allergic_to.has_key?(allergy.ingredient) 
+
              allergic_to[allergy.ingredient] += 1
            else
                 allergic_to[allergy.ingredient] = 1
+
+
            end
 
         }
